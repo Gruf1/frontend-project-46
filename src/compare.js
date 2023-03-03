@@ -19,6 +19,7 @@ const compare = (obj1, obj2) => {
     if (!_.has(obj1, currentKey) && _.has(obj2, currentKey)) {
       return [...acc, `  + ${currentKey}: ${obj2[currentKey]}`];
     }
+    return acc;
   }, []);
 
   const res = ['{', ...lines, '}'].join('\n');
