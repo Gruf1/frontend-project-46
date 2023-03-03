@@ -1,0 +1,26 @@
+name: compare-check
+on: push
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: clone rep
+        uses: actions/checkout@v3
+      - name: install node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16.x'
+          cache: 'npm'
+      - name: install dependencies
+        run: make install
+      - name: run eslint
+        run: make lint
+      - name: run test
+        run: make test
+      - name: run codeclimat coverage
+        uses: paambaati/codeclimate-action@v3.2.0
+        env:
+          CODECLIMATE_REPORT_ID: ${{ secrets.CODECLIMATE_REPORT_ID }}
+        with:
+          coverageCommand: make test-coverage
+          debug: true
