@@ -1,15 +1,27 @@
 name: compare-check
+
 on: push
+
+env:
+  CI: true
+
 jobs:
+
   build:
+
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [ 16.x ]
+
     steps:
       - name: clone rep
         uses: actions/checkout@v3
-      - name: install node
+      - name: install node ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: ${{ matrix.node-version }}
           cache: 'npm'
       - name: install dependencies
         run: make install
@@ -20,7 +32,7 @@ jobs:
       - name: run codeclimat coverage
         uses: paambaati/codeclimate-action@v3.2.0
         env:
-          CODECLIMATE_REPORT_ID: ${{ secrets.CODECLIMATE_REPORT_ID }}
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: make test-coverage
           debug: true
