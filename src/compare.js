@@ -1,6 +1,7 @@
+import _ from 'lodash';
 import fs from 'fs';
 import path from 'path';
-import _ from 'lodash';
+import parser from './parser.js';
 
 const compare = (obj1, obj2) => {
   const commonKeys = [...Object.keys(obj1), ...Object.keys(obj2)];
@@ -26,13 +27,23 @@ const compare = (obj1, obj2) => {
   return res;
 };
 
-export default (filePath1, filePath2, type = 'json') => {
-  let obj1;
-  let obj2;
-  if (type === 'json') {
-    obj1 = JSON.parse(fs.readFileSync(path.resolve(filePath1)));
-    obj2 = JSON.parse(fs.readFileSync(path.resolve(filePath2)));
-  }
+const getAbsPath = (filePath) => path.resolve(process.cwd(), filePath);
+const getExtension = (filePath) => path.parse(filePath).ext.slice(1);
+const readFile = (filePath) => fs.readFileSync(filePath, 'utf8');
+
+export default (filePath1, filePath2) => {
+  const path1 = getAbsPath(filePath1);
+  const path2 = getAbsPath(filePath2);
+
+  const ext1 = getExtension(filePath1);
+  const ext2 = getExtension(filePath2);
+
+  const data1 = readFile(path1);
+  const data2 = readFile(path2);
+
+  const obj1 = parser(ext1, data1);
+  const obj2 = parser(ext2, data2);
+
   const res = compare(obj1, obj2);
   return res;
 };

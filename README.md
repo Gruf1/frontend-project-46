@@ -5,3 +5,5 @@
 [![compare-check](https://github.com/Gruf1/frontend-project-46/actions/workflows/compare-check.yml/badge.svg)](https://github.com/Gruf1/frontend-project-46/actions/workflows/compare-check.yml)
 ## Example of Gendiff
 [![asciicast](https://asciinema.org/a/7NZrqUC9vPMi4sDxO5vYVTXVj.svg)](https://asciinema.org/a/7NZrqUC9vPMi4sDxO5vYVTXVj)
+## Exmaple of Gendiff with type yml/yaml
+[![asciicast](https://asciinema.org/a/w3eGUinqVY2Yr51bQaNrAzxq2.svg)](https://asciinema.org/a/w3eGUinqVY2Yr51bQaNrAzxq2)
