@@ -8,9 +8,8 @@ const __dirname = dirname(__filename);
 const getFixturePath = (filename) => join(__dirname, '..', '__fixtures__', filename);
 const readFixture = (filename) => fs.readFileSync(getFixturePath(filename), 'utf8');
 const data = [
-  ['file1.json', 'file2.json', 'stylish.txt'],
-  ['file1.yaml', 'file2.yaml', 'stylish.txt'],
-  ['file1.yml', 'file2.yml', 'stylish.txt'],
+  ['file1.json', 'file2.json', 'expected-stylish.txt'],
+  ['file1.yaml', 'file2.yaml', 'expected-stylish.txt'],
 ];
 
 describe('check compare', () => {
